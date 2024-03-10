@@ -65,9 +65,9 @@ export default function Home() {
 
       <div className='mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left'>
         <section>
-          <h2 className={`mb-3 text-2xl font-semibold rounded-lg border border-transparent px-5 py-4 transition-colors hover:dark:bg-neutral-800/30`}>
+          <button className={`mb-3 text-2xl font-semibold rounded-lg border border-transparent px-5 py-4 transition-colors hover:dark:bg-neutral-800/30`} onClick={() => askAI()}>
             Ask AI <span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>-&gt;</span>
-          </h2>
+          </button>
           <div className='input-container'>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`} id='response-output'>
               What do you want to know?
