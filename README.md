@@ -10,6 +10,14 @@ Using AI as a helper to analyze tokens movements & trends on Solana
    npm install
    ```
 
+1. Add Gemini API to enviroment
+   > Get "YOUR_API" from [here](https://aistudio.google.com/app/apikey)
+   ```sh
+   cp .env.example .env;
+   # you can edit your `.env` file directly or run this command
+   echo "YOUR_API" >> .env;
+   ```
+
 1. Run application
 
    ```sh
