@@ -12,7 +12,12 @@ export default function Home() {
   const [chatHistory, setChatHistory] = useState([]);
   const [loading, setLoading] = useState('');
 
-  const supriseOptions = ['How is Solana token performing in the last hour?', 'What is the best token on Solana?', 'What tokens are trending on Solana?'];
+  const supriseOptions = [
+    'How is Solana token performing in the last 24 hours?',
+    'How is Jupiter token performing in the last 24 hours?',
+    'What is the best token on Solana?',
+    'What tokens are trending on Solana?',
+  ];
 
   const surpriseMe = () => {
     const randomValue = supriseOptions[Math.floor(Math.random() * supriseOptions.length)];
@@ -59,7 +64,7 @@ export default function Home() {
       return;
     } else {
       setError('');
-      prompt += 'Is Solana price going up or down in the next 24 hours? Please give elaborate answer but start with UP or DOWN.';
+      prompt += 'Is the price going up or down? Please give elaborate answer but start with UP or DOWN.';
     }
     const result = await model.generateContentStream(prompt);
     console.log('💭 Sending request');
