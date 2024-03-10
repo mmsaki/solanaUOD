@@ -1,13 +1,17 @@
+'use client';
 import Image from 'next/image';
 import 'dotenv/config';
-import { assert } from 'console';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
+import { useState } from 'react';
 
 export default function Home() {
+  // states
+  const [error, setError] = useState('');
+
   // Initialize the Genereative Models
-  if (process.env.GEMINI_API === undefined) console.error('API KEY not loaded');
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
+  if (process.env.NEXT_PUBLIC_GEMINI_API === undefined) console.error('API KEY not loaded');
+  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API);
 
   // Configure model responses
   const generationConfig = {
@@ -33,7 +37,7 @@ export default function Home() {
 
   // gemini-pro for text only, while gemini-pro-vision is for multimodal input
   const model = genAI.getGenerativeModel({ model: 'gemini-pro', generationConfig });
-  assert(model.model === 'models/gemini-pro', 'We only support "gemini-pro" model!');
+  console.assert(model.model === 'models/gemini-pro', 'We only support "gemini-pro" model!');
 
   async function askAI() {
     // Our prompt set-up
@@ -41,14 +45,13 @@ export default function Home() {
     const result = await model.generateContentStream(prompt);
 
     let text = '';
-    let responseOutput = document.getElementById('response-output');
-    responseOutput.innerHTML = '';
     for await (const chunk of result.stream) {
       const chunkText = chunk.text();
       text += chunkText;
     }
     console.log(text);
   }
+  // askAI();
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
@@ -71,10 +74,12 @@ export default function Home() {
             </p>
             <input
               className='m-2 text-gray-400 font-base rounded-lg border px-2 py-2 transition-colors hover:dark:bg-neutral-800/3'
-              onChange={''}
+              onChange={() => {}}
               value={''}
               placeholder={'Write your prompt here...'}
             />
+            {!error && <button>Ask me</button>}
+            {error && <button>Cancel</button>}
           </div>
         </section>
       </div>
