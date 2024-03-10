@@ -12,22 +12,23 @@
 
   // Configure tool-specific properties.
   "customizations": {
-    "settings": {
-      "editor.formatOnSave": true,
-      "editor.defaultFormatter": ["esbenp.prettier-vscode"],
-      "prettier.jsxSingleQuote": true,
-      "prettier.printWidth": 200,
-      "prettier.singleQuote": true,
-      "prettier.semi": true,
-      "prettier.bracketSpacing": true,
-      "prettier.bracketSameLine": true,
-      "prettier.arrowParens": "always",
-      "prettier.useTabs": false,
-      "betterAlign.surroundSpace": {
-        "colon": [0, 1],
-        "assignment": [1, 1],
-        "arrow": [1, 1],
-        "comment": 2
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode"],
+      "settings": {
+        "prettier.jsxSingleQuote": true,
+        "prettier.printWidth": 200,
+        "prettier.singleQuote": true,
+        "prettier.semi": true,
+        "prettier.bracketSpacing": true,
+        "prettier.bracketSameLine": true,
+        "prettier.arrowParens": "always",
+        "prettier.useTabs": false,
+        "betterAlign.surroundSpace": {
+          "colon": [0, 1],
+          "assignment": [1, 1],
+          "arrow": [1, 1],
+          "comment": 2
+        }
       }
     }
   },
