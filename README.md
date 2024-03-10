@@ -1,6 +1,6 @@
 # solanaUOD
 
-Using AI as a helper to analyze tokens movements & trends on Solana
+AI as a helper to analyze tokens movements & trends on Solana, UP or DOWN?
 
 ## Set-up
 
@@ -11,7 +11,9 @@ Using AI as a helper to analyze tokens movements & trends on Solana
    ```
 
 1. Add Gemini API to enviroment
+
    > Get "YOUR_API" from [here](https://aistudio.google.com/app/apikey)
+
    ```sh
    cp .env.example .env;
    # you can edit your `.env` file directly or run this command
