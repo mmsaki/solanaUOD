@@ -78,8 +78,10 @@ export default function Home() {
               value={''}
               placeholder={'Write your prompt here...'}
             />
-            {!error && <button>Ask me</button>}
-            {error && <button>Cancel</button>}
+          </div>
+          {error && <p className='text-red-700'>{error}</p>}
+          <div key={{}}>
+            <p className={`m-0 max-w-[30ch] text-sm opacity-50`} id='answer'></p>
           </div>
         </section>
       </div>
