@@ -10,6 +10,7 @@ export default function Home() {
   const [error, setError] = useState('');
   const [value, setValue] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [loading, setLoading] = useState('');
 
   const supriseOptions = ['How is Solana token performing in the last hour?', 'What is the best token on Solana?', 'What tokens are trending on Solana?'];
 
@@ -62,6 +63,7 @@ export default function Home() {
     }
     const result = await model.generateContentStream(prompt);
     console.log('💭 Sending request');
+    setLoading('loading');
 
     let text = '';
     for await (const chunk of result.stream) {
@@ -81,6 +83,7 @@ export default function Home() {
     ]);
 
     setValue('');
+    setLoading('');
 
     console.log(chatHistory);
 
@@ -127,6 +130,7 @@ export default function Home() {
             </div>
           </div>
           {error && <p className='text-red-700'>{error}</p>}
+          {loading && 'loading...'}
           <div className='mt-10 overflow-scroll'>
             {chatHistory &&
               chatHistory.map((chatItem, index) => (
