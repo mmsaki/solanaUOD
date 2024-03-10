@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Solana Up or Down',
-  description: 'AI as a helper to analyze tokens movements & trends on Solana, UP or DOWN?',
+  description: 'AI analyzing tokens movements and trends on Solana. Up or Down?',
 };
 
 export default function RootLayout({ children }) {
