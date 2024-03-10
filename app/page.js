@@ -14,9 +14,13 @@ export default async function Home() {
 
   // Our prompt set-up
   const prompt = 'Is Solana price going up or down in the next 24 hours? Please give elaborate answer but start with UP or DOWN.';
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const text = response.text();
+  const result = await model.generateContentStream(prompt);
+
+  let text = '';
+  for await (const chunk of result.stream) {
+    const chunkText = chunk.text();
+    text += chunkText;
+  }
   console.log(text);
 
   return (
