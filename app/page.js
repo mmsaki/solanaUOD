@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import 'dotenv/config';
 import { assert } from 'console';
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
 
 export default async function Home() {
   // Initialize the Genereative Models
@@ -11,11 +12,24 @@ export default async function Home() {
   // Configure model responses
   const generationConfig = {
     stopSequences: ['red'],
+    // 100 tokens correspond to roughly 60-80 words.
     maxOutputTokens: 200,
     temperature: 0.9,
     topP: 0.1,
     topK: 16,
   };
+
+  // use safety settings
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+  ];
 
   // gemini-pro for text only, while gemini-pro-vision is for multimodal input
   const model = genAI.getGenerativeModel({ model: 'gemini-pro', generationConfig });
