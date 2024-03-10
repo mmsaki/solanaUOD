@@ -60,7 +60,7 @@ export default function Home() {
     let prompt = value;
 
     if (!value) {
-      setError('Error! Please ask a question');
+      setError('Error! Please provide a token name on Solana');
       return;
     } else {
       setError('');
@@ -125,7 +125,7 @@ export default function Home() {
                 className='h-10 grow text-gray-400 font-base rounded-lg border px-2 py-2 transition-colors hover:dark:bg-neutral-800/3'
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
-                placeholder={'Write your prompt here...'}
+                placeholder={'Give any token name...'}
               />
               <button
                 className={`min-w-40 h-10 grow-0 mb-3 px-2 py-2 text-xl border-neutral-200 font-semibold border-transparent transition-colors hover:dark:bg-neutral-800/30 cursor-pointer`}
