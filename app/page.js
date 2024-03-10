@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { assert } from 'console';
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-export default function Home() {
+export default async function Home() {
   // Initialize the Genereative Models
   if (process.env.GEMINI_API === undefined) console.error('API KEY not loaded');
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
@@ -11,6 +11,13 @@ export default function Home() {
   // gemini-pro for text only, while gemini-pro-vision is for multimodal input
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
   assert(model.model === 'models/gemini-pro', 'We only support "gemini-pro" model!');
+
+  // Our prompt set-up
+  const prompt = 'Is Solana price going up or down in the next 24 hours? Please give elaborate answer but start with UP or DOWN.';
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  console.log(text);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
