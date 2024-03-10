@@ -8,14 +8,30 @@
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
 
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "bash scripts/install-dependencies.sh",
 
   // Configure tool-specific properties.
-  "customizations": {}
+  "customizations": {
+    "settings": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": ["esbenp.prettier-vscode"],
+      "prettier.jsxSingleQuote": true,
+      "prettier.printWidth": 200,
+      "prettier.singleQuote": true,
+      "prettier.semi": true,
+      "prettier.bracketSpacing": true,
+      "prettier.bracketSameLine": true,
+      "prettier.arrowParens": "always",
+      "prettier.useTabs": false,
+      "betterAlign.surroundSpace": {
+        "colon": [0, 1],
+        "assignment": [1, 1],
+        "arrow": [1, 1],
+        "comment": 2
+      }
+    }
+  },
+  "forwardPorts": [3000]
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
