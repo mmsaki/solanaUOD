@@ -8,8 +8,17 @@ export default async function Home() {
   if (process.env.GEMINI_API === undefined) console.error('API KEY not loaded');
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
 
+  // Configure model responses
+  const generationConfig = {
+    stopSequences: ['red'],
+    maxOutputTokens: 200,
+    temperature: 0.9,
+    topP: 0.1,
+    topK: 16,
+  };
+
   // gemini-pro for text only, while gemini-pro-vision is for multimodal input
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-pro', generationConfig });
   assert(model.model === 'models/gemini-pro', 'We only support "gemini-pro" model!');
 
   // Our prompt set-up
