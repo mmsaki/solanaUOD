@@ -11,11 +11,7 @@ export default function Home() {
   const [value, setValue] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
-  const supriseOptions = [
-    'How is solana performing in the last hour. Please give elaborate answer but start with Up or Down?',
-    'What is the best token in Solana?',
-    'What tokens are tredning in Solana right now?',
-  ];
+  const supriseOptions = ['How are Solana token performing in the last hour?', 'What is the best token on Solana?', 'What tokens are trending on Solana?'];
 
   const surpriseMe = () => {
     const randomValue = supriseOptions[Math.floor(Math.random() * supriseOptions.length)];
@@ -55,7 +51,15 @@ export default function Home() {
 
   async function askAI() {
     // Our prompt set-up
-    const prompt = 'Is Solana price going up or down in the next 24 hours? Please give elaborate answer but start with UP or DOWN.';
+    let prompt = value;
+
+    if (!value) {
+      setError('Error! Please ask a question');
+      return;
+    } else {
+      setError('');
+      prompt += 'Is Solana price going up or down in the next 24 hours? Please give elaborate answer but start with UP or DOWN.';
+    }
     const result = await model.generateContentStream(prompt);
     console.log('💭 Sending request');
 
@@ -64,6 +68,22 @@ export default function Home() {
       const chunkText = chunk.text();
       text += chunkText;
     }
+    setChatHistory((oldChatHistory) => [
+      ...oldChatHistory,
+      {
+        role: 'user',
+        parts: value,
+      },
+      {
+        role: 'model',
+        parts: text,
+      },
+    ]);
+
+    setValue('');
+
+    console.log(chatHistory);
+
     console.log('💹 Results:', text);
   }
   // askAI();
@@ -108,9 +128,14 @@ export default function Home() {
           </div>
           {error && <p className='text-red-700'>{error}</p>}
           <div className='mt-10 overflow-scroll'>
-            <div key={{}} className='flex border rounded-m p-4'>
-              <p className={`m-0 max-w-[30ch] text-sm opacity-50`} id='answer'></p>
-            </div>
+            {chatHistory &&
+              chatHistory.map((chatItem, index) => (
+                <div key={{ index }} className='flex border rounded-m p-4'>
+                  <p className={`m-0 max-w-[30ch] text-sm opacity-50`} id='answer'>
+                    {chatItem.role} : {chatItem.parts}
+                  </p>
+                </div>
+              ))}
           </div>
         </section>
       </div>
