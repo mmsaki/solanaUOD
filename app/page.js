@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import 'dotenv/config';
+import { assert } from 'console';
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 export default function Home() {
@@ -7,7 +8,9 @@ export default function Home() {
   if (process.env.GEMINI_API === undefined) console.error('API KEY not loaded');
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
 
-  console.log('', genAI);
+  // gemini-pro for text only, while gemini-pro-vision is for multimodal input
+  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+  assert(model.model === 'models/gemini-pro', 'We only support "gemini-pro" model!');
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
