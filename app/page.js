@@ -117,25 +117,25 @@ export default function Home() {
             </div>
             <div className='w-full flex'>
               <input
-                className='grow text-gray-400 font-base rounded-lg border px-2 py-2 transition-colors hover:dark:bg-neutral-800/3'
+                className='h-10 grow text-gray-400 font-base rounded-lg border px-2 py-2 transition-colors hover:dark:bg-neutral-800/3'
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
                 placeholder={'Write your prompt here...'}
               />
               <button
-                className={`grow-0 mb-3 px-2 py-2 text-2xl font-semibold rounded-lg border border-transparent transition-colors hover:dark:bg-neutral-800/30 cursor-pointer`}
+                className={`min-w-40 h-10 grow-0 mb-3 px-2 py-2 text-xl border-neutral-200 font-semibold border-transparent transition-colors hover:dark:bg-neutral-800/30 cursor-pointer`}
                 onClick={() => askAI()}>
                 Ask AI <span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>-&gt;</span>
               </button>
             </div>
           </div>
-          {error && <p className='text-red-700'>{error}</p>}
-          {loading && 'loading...'}
-          <div className='mt-10 overflow-scroll'>
+          {error && <p className='text-red-700 flex'>{error}</p>}
+          {loading && <p className='text-blue-600'>Loading...</p>}
+          <div className='mt-1 overflow-scroll'>
             {chatHistory &&
               chatHistory.map((chatItem, index) => (
                 <div key={{ index }} className='flex border rounded-m p-4'>
-                  <p className={`m-0 max-w-[30ch] text-sm opacity-50`} id='answer'>
+                  <p className={`m-0 text-sm opacity-50`} id='answer'>
                     {chatItem.role} : {chatItem.parts}
                   </p>
                 </div>
