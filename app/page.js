@@ -11,7 +11,7 @@ export default function Home() {
   const [value, setValue] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
-  const supriseOptions = ['How are Solana token performing in the last hour?', 'What is the best token on Solana?', 'What tokens are trending on Solana?'];
+  const supriseOptions = ['How is Solana token performing in the last hour?', 'What is the best token on Solana?', 'What tokens are trending on Solana?'];
 
   const surpriseMe = () => {
     const randomValue = supriseOptions[Math.floor(Math.random() * supriseOptions.length)];
